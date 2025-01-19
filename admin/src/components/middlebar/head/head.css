@@ -1,0 +1,12 @@
+.up-head {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+.up-head h1 {
+  font-family: "Outfit";
+  font-weight: 500;
+  font-size: 48px;
+}

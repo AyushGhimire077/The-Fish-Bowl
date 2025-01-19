@@ -1,0 +1,10 @@
+.allItem {
+  height: 100vh;
+  margin-left: 350px;
+  width: auto;
+  position: relative;
+  top: -860px;
+  text-align: center;
+  right: 0;
+  padding: 40px 50px;
+}

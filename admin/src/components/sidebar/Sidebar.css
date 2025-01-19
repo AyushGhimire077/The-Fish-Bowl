@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+.sidebar {
+  height: 100vh;
+  width: 250px;
+  padding: 50px 40px;
+  background-color: #fbf5e5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar .head {
+  height: auto;
+  text-align: center;
+}
+
+.sidebar .head h3 {
+  font-size: 30px;
+  color: #a35c7a;
+  font-weight: 520;
+}
+
+.sidebar hr {
+  border: none;
+  border-top: 2px solid #c04e00;
+  margin: 10px 0;
+}
+
+.sidebar .side-col {
+  display: flex;
+  width: 100%;
+  padding: 10px 0px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.side-col .boxes {
+  width: 100%;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+}
+
+.boxes button {
+  text-decoration: none;
+  font-size: 20px;
+  color: #16404d;
+  border: none;
+  background: transparent;
+  padding: 12px 0px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+}
