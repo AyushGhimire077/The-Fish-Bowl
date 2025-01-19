@@ -1,12 +1,12 @@
 const express = require('express');
-const Product = require('../models/productSchema');
+const Aquarium = require('../models/aquariumSchema');
 const multer = require('multer');
 const path = require('path');
 
-const productRoute = express.Router();
+const aquariumRoute = express.Router();
 
 const storage = multer.diskStorage({
-    destination: 'uploads/',
+    destination: 'aquariumsUpload/',
     filename: (req, file, cb) => {
         const ext = path.extname(file.originalname);
         cb(null, `${file.fieldname}-${Date.now()}${ext}`);
@@ -26,17 +26,15 @@ const upload = multer({
     },
 });
 
-productRoute.post('/product', upload.single('image'), async (req, res) => {
+aquariumRoute.post('/aquarium', upload.single('image'), async (req, res) => {
     const { name, price, description } = req.body;
     const image = req.file;
-
-    console.log('Received data:', { name, price, description, image });
 
     if (!name || !price || !description || !image) {
         return res.status(400).json({ message: "All fields, including image, are required" });
     }
 
-    const product = new Product({
+    const aquarium = new Aquarium({
         name,
         price,
         description,
@@ -44,14 +42,15 @@ productRoute.post('/product', upload.single('image'), async (req, res) => {
     });
 
     try {
-        await product.save();
-        res.status(201).json({ message: "Saved successfully", product });
+        await aquarium.save();
+        res.status(201).json({ message: "Saved successfully", aquarium });
     } catch (error) {
-        console.error('Error while submitting:', error);
-        res.status(500).json({ message: "Error while submitting", error });
+        console.error("Error while submitting:", error);  // Log the full error
+        res.status(500).json({ message: "Error while submitting", error: error.message || error });
     }
 });
 
-productRoute.use('/images', express.static(path.join(__dirname, '../../uploads')));
 
-module.exports = productRoute;
+aquariumRoute.use('/images', express.static(path.join(__dirname, '../../aquariumsUpload')));
+
+module.exports = aquariumRoute;

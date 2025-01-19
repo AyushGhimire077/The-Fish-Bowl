@@ -54,3 +54,12 @@
   width: 100%;
   text-align: center;
 }
+button.active {
+  color: #a35c7a;
+  transition: 0.4s ease;
+}
+
+button.inactive {
+  transition: 0.4s ease;
+  color: black;
+}
