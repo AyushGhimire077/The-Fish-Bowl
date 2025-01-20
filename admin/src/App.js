@@ -10,9 +10,11 @@ import All from "./components/middlebar/all/All";
 import Products from "./components/middlebar/products/Product";
 import Fishes from "./components/middlebar/fishes/Fishes";
 import Aquarium from "./components/middlebar/aquarium/Aquarium";
+import Footer from "./components/footer/Footer";
 
 const App = () => {
   return (
+    <>
     <Router>
       <div>
         <Sidebar />
@@ -26,6 +28,8 @@ const App = () => {
         </Routes>
       </div>
     </Router>
+    <Footer/>
+    </>
   );
 };
 

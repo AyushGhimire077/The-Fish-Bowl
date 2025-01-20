@@ -6,24 +6,76 @@
   top: -860px;
   text-align: center;
   right: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   padding: 40px 50px;
 }
 .all-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  justify-content: center;
+  gap: 14px;
 }
 
 .item {
-  width: 200px;
-  padding: 20px;
+  width: 250px;
+  min-height: auto;
+  max-height: 450px;
+  padding: 8px;
   border: 1px solid #ccc;
   border-radius: 10px;
   text-align: center;
+  margin: 10px;
+}
+.item h3,p{
+  margin: 0;
+}
+.item h3{
+  font-size: 25px;
+  font-weight: 550;
+  font-family: Outfit;
+  text-transform: capitalize;
+  margin-bottom: 6px;
+}
+.item p{
+  font:20px 500;
 }
 
 .item img {
   width: 100%;
-  height: auto;
+  max-height: auto;
+  min-height: 290px;
+  min-height: 200px;
   border-radius: 5px;
+}
+.item .img{
+  height: 220px;
+  overflow: hidden;
+}
+.delete-btn {
+  background-color: #A35C7A;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+.delete-btn:hover {
+  background-color: #C890A7;
+}
+.see-more {
+  color: rgb(104, 74, 74);
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+
+  text-transform: lowercase;
+}
+#amt{
+  margin-right: 74px;
+  padding: 8px;
+  font-weight: 500;
 }

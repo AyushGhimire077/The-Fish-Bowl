@@ -36,6 +36,9 @@ const Product = () => {
       setLoading(false);
       setSuccess(true);
       setCountdown(5);
+      setName('');
+      setDesc('');
+      setPrice('');
     } catch (error) {
       setLoading(false);
       console.error("Error while submitting:", error);

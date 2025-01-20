@@ -27,15 +27,15 @@ const PORT = process.env.PORT || 4000;
 
 //endpoints
 app.get('/api/aquarium', async (req, res) => {
-    try {
-      const items = await Aquarium.find();
-      res.json(items);
-      console.error('Error fetching items:', error);
-    } catch (error) {
-      res.status(500).json({ message: 'Error fetching items', error });
-    }
-  });
-  
+  try {
+    const items = await Aquarium.find({});
+    res.json(items);
+  } catch (error) {
+    console.error('Error fetching items:', error);  // Log the error correctly
+    return res.status(500).json({ message: 'Error fetching items', error });
+  }
+});
+
   app.get('/api/products', async (req, res) => {
     try {
       const items = await Product.find({}); 
@@ -45,7 +45,10 @@ app.get('/api/aquarium', async (req, res) => {
       res.status(500).json({ message: 'Error fetching items', error: error.message });
     }
   });
+
+  
   app.use('/images', express.static(path.join(__dirname, 'uploads')));
+  app.use('/images', express.static(path.join(__dirname, 'aquariumsUpload')));
 
   
 

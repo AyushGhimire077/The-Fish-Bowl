@@ -49,8 +49,23 @@ aquariumRoute.post('/aquarium', upload.single('image'), async (req, res) => {
         res.status(500).json({ message: "Error while submitting", error: error.message || error });
     }
 });
+aquariumRoute.delete('/aquarium/:id', async (req, res) => {
+    try {
+      const aquariumId = req.params.id;
+  
+      const aquarium = await Aquarium.findById(aquariumId);
+  
+      if (!aquarium) {
+        return res.status(404).json({ message: 'Aquarium not found' });
+      }
+      await Aquarium.findByIdAndDelete(aquariumId);
+  
+      res.status(200).json({ message: 'Aquarium deleted successfully' });
+    } catch (error) {
+      console.error('Error deleting Aquarium:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
 
-
-aquariumRoute.use('/images', express.static(path.join(__dirname, '../../aquariumsUpload')));
 
 module.exports = aquariumRoute;

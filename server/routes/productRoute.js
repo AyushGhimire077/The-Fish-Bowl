@@ -53,5 +53,25 @@ productRoute.post("/product", upload.single("image"), async (req, res) => {
     res.status(500).json({ message: "Error while submitting", error });
   }
 });
+productRoute.delete('/products/:id', async (req, res) => {
+    try {
+      const productId = req.params.id;
+  
+      // Find the product by ID
+      const product = await Product.findById(productId);
+  
+      if (!product) {
+        return res.status(404).json({ message: 'Product not found' });
+      }
+  
+      // Delete the product
+      await Product.findByIdAndDelete(productId);
+  
+      res.status(200).json({ message: 'Product deleted successfully' });
+    } catch (error) {
+      console.error('Error deleting product:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
 
 module.exports = productRoute;
