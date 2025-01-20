@@ -9,6 +9,7 @@ const All = () => {
     fetch("http://localhost:4000/api/products")
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setItems(data);
       })
       .catch((error) => {
@@ -24,10 +25,13 @@ const All = () => {
           {items.length > 0 ? (
             items.map((item) => (
               <div key={item._id} className="item">
+                <img
+                  src={`http://localhost:4000/images/${item.image.replace("images/", "")}`}
+                  alt={item.name}
+                />
                 <h3>{item.name}</h3>
                 <p>{item.description}</p>
                 <p>Price: Rs{item.price}</p>
-                <img src={`http://localhost:4000${item.image}`} alt={item.name} />
               </div>
             ))
           ) : (

@@ -6,6 +6,7 @@ const aquariumRoute = require('./routes/aquariumRoute');
 const connectDB = require('./db')
 const Aquarium = require('./models/aquariumSchema'); 
 const Product = require('./models/productSchema');
+const path = require('path')
 
 const app = express();
 
@@ -44,7 +45,8 @@ app.get('/api/aquarium', async (req, res) => {
       res.status(500).json({ message: 'Error fetching items', error: error.message });
     }
   });
-  
+  app.use('/images', express.static(path.join(__dirname, 'uploads')));
+
   
 
 app.listen(PORT, () => {

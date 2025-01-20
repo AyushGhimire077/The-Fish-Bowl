@@ -1,31 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import './Products.css';
-import Head from '../head/Head'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import "./Products.css";
+import Head from "../head/Head";
 
 const Product = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [countdown, setCountdown] = useState(5);
-  const [name, setName] = useState('');
-  const [desc, setDesc] = useState('');
-  const [price, setPrice] = useState('');
+  const [name, setName] = useState("");
+  const [desc, setDesc] = useState("");
+  const [price, setPrice] = useState("");
   const [image, setImage] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append('name', name);
-    formData.append('description', desc);
-    formData.append('price', price);
-    formData.append('image', image);
+    formData.append("name", name);
+    formData.append("description", desc);
+    formData.append("price", price);
+    formData.append("image", image);
+
+    if (!name || !desc || !price || !image) {
+      alert("All fields are required!");
+      return;
+    }
 
     try {
       setLoading(true);
-      await axios.post('http://localhost:4000/api/product', formData, {
+      await axios.post("http://localhost:4000/api/product", formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
         },
       });
       setLoading(false);
@@ -33,8 +38,8 @@ const Product = () => {
       setCountdown(5);
     } catch (error) {
       setLoading(false);
-      console.error('Error while submitting:', error);
-      alert('Failed to add product. Please try again.');
+      console.error("Error while submitting:", error);
+      alert("Failed to add product. Please try again.");
     }
   };
 
@@ -44,18 +49,17 @@ const Product = () => {
         setCountdown((prev) => prev - 1);
       }, 1000);
 
-      
       return () => clearInterval(timer);
     } else if (countdown === 0) {
-      setSuccess(false);  
+      setSuccess(false);
     }
   }, [success, countdown]);
 
   return (
     <>
       <div className="add-pro-box">
-        <Head/>
-        <hr/>
+        <Head />
+        <hr />
         <h2>Products</h2>
         {loading && (
           <div className="loading-overlay">
@@ -65,11 +69,10 @@ const Product = () => {
 
         {success && (
           <div className="succ-mesg">
-            <div class="succ-box">
-            <p>Product Added Successfully</p>
-            <p>Closing in {countdown} seconds...</p>
+            <div className="succ-box">
+              <p>Product Added Successfully</p>
+              <p>Closing in {countdown} seconds...</p>
             </div>
-            
           </div>
         )}
 
@@ -85,7 +88,7 @@ const Product = () => {
               />
             </div>
             <div className="pro desc">
-            <label>Product description</label>
+              <label>Product description</label>
               <input
                 value={desc}
                 type="text"
@@ -94,7 +97,7 @@ const Product = () => {
               />
             </div>
             <div className="pro price">
-            <label>Product price</label>
+              <label>Product price</label>
               <input
                 value={price}
                 type="text"
@@ -103,8 +106,13 @@ const Product = () => {
               />
             </div>
             <div className="pro img">
-            <label>Product image</label>
-              <input type="file" placeholder="Item image" onChange={(e) => setImage(e.target.files[0])} />
+              <label>Product image</label>
+              <input
+                type="file"
+                placeholder="Item image"
+                name={image}
+                onChange={(e) => setImage(e.target.files[0])}
+              />
             </div>
             <div className="submit-btn">
               <input type="submit" value="Submit" />
